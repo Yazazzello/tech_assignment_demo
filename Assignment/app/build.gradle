@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "test.yaz.assignment"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "CLIENT_ID", '"YOUR_CLIENT_ID"'
+            buildConfigField "String", "CLIENT_SECRET", '"YOUR_CLIENT_SECRET"'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+        }
+    }
+}
+
+dependencies {
+    final SUPPORT_LIBRARY_VERSION = '25.0.0'
+    final RETROFIT_VERSION = '2.1.0'
+    final DAGGER_VERSION = '2.6.1'
+    final RX_ANDROID_VERSION = '1.2.1'
+    final RX_JAVA = '1.1.10'
+    final BUTTERKNIFE_VERSION = '8.4.0'
+    final TIMBER_VERSION = '4.3.0'
+    final LOG_INTERCEPTOR_VERSION = '3.3.1'
+    final STETHO_VERSION = '1.4.0'
+    final LEAKCANARY_VERSION = '1.5'
+
+    def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+
+    def jUnit = "junit:junit:4.12"
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile 'com.google.maps.android:android-maps-utils:0.4+'
+
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+
+    compile "io.reactivex:rxandroid:$RX_ANDROID_VERSION"
+    compile "io.reactivex:rxjava:$RX_JAVA"
+
+    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    compile "com.jakewharton.timber:timber:$TIMBER_VERSION"
+
+    compile  "com.google.dagger:dagger:$DAGGER_VERSION"
+    provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+
+    //development
+    compile "com.squareup.okhttp3:logging-interceptor:$LOG_INTERCEPTOR_VERSION"
+    compile "com.facebook.stetho:stetho:$STETHO_VERSION"
+    compile "com.facebook.stetho:stetho-okhttp3:$STETHO_VERSION"
+
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$LEAKCANARY_VERSION"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAKCANARY_VERSION"
+
+    compile 'com.google.android.gms:play-services-maps:9.6.0'
+    compile 'com.google.android.gms:play-services-location:9.6.0'
+
+    testCompile "$jUnit"
+
+    // APT dependencies
+    apt daggerCompiler
+    testApt daggerCompiler
+    androidTestApt daggerCompiler
+    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_first"
+        android:enabled="true"
+        android:icon="@drawable/ic_foursquare"
+        android:title="@string/foursquare"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_second"
+        android:enabled="true"
+        android:icon="@drawable/ic_maps"
+        android:title="@string/where_am_i"
+        />
+    <item
+        android:id="@+id/action_third"
+        android:enabled="false"
+        android:icon="@drawable/ic_car"
+        android:title="@string/milemarkers"
+        />
+</menu>
