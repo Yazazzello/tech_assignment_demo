@@ -7,3 +7,8 @@ Build an app that, based on a geolocation, tells the user in which country the l
 To help you get started, we provide a .kml Google Earth overlay file containing the geometry information of all the countries in the world. Your app should use this information to determine in which country a given geocoordinate is situated.
 
 3. As a user a would like to see in an app and on a map my location in realtime and also the milemarker (https://es.wikipedia.org/wiki/Hito_kilom%C3%A9trico) which are placed along the road.
+
+Written in Java with retrolambda, used libs:
+Dagger;
+RxJava;
+Retrofit.
